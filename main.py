@@ -1,6 +1,6 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from logic import *
+from logic import GradeSubmission
 
 def main():
     application = QApplication(sys.argv)
@@ -8,9 +8,9 @@ def main():
 
     grade_submission = GradeSubmission()
     window.setCentralWidget(grade_submission)
-    grade_submission.setupUi(window)
+    window.setWindowTitle("Grading Submissions")
+    window.setFixedSize(305,428)
 
-    window.setFixedSize(291,363)
     window.show()
     sys.exit(application.exec())
 
