@@ -1,6 +1,7 @@
 from gui import Ui_mainWindow
 from PyQt6.QtWidgets import QMainWindow
 import csv
+import os
 
 
 class GradeSubmission(QMainWindow, Ui_mainWindow):
@@ -98,6 +99,7 @@ class GradeSubmission(QMainWindow, Ui_mainWindow):
                     final_score = max(scores)
                 else:
                     raise ValueError("Select either Average Score or Highest Score")
+                print(f"Submitting: {name}, {assignment}, {scores}, {final_score}")
                 self.submit_score(name, assignment, scores, final_score)
                 self.error_label.setText("Submitted!")
                 self.clear()
@@ -105,8 +107,12 @@ class GradeSubmission(QMainWindow, Ui_mainWindow):
             self.error_label.setText(str(e))
 
     def submit_score(self, name, assignment, scores, final_score):
-        with open('grades.csv', 'a', newline='') as file:
+        file_name = 'grades.csv'
+        file_exists = os.path.isfile(file_name)
+        with open(file_name, 'a', newline='') as file:
             writer = csv.writer(file)
+            if not file_exists:
+                writer.writerow(['Name', 'Assignment', 'Score 1', 'Score 2', 'Score 3', 'Final Score'])
             row = [name, assignment] + scores + [final_score]
             writer.writerow(row)
 
