@@ -9,6 +9,7 @@ class GradeSubmission(QMainWindow, Ui_GradeSubmissions):
         self.setupUi(self)
         self.clear_score_inputs()
         self.add_csv_header()
+
         self.Submit_pushButton.clicked.connect(self.calculate_scores)
         self.NumOfScores_lineEdit.textChanged.connect(self.update_score_inputs)
 
@@ -28,7 +29,7 @@ class GradeSubmission(QMainWindow, Ui_GradeSubmissions):
     def update_score_inputs(self):
         try:
             self.clear_score_inputs()
-            num = int(self.NumOfScores_lineEdit.text().strip() or 0)  # Safely parse as integer
+            num = int(self.NumOfScores_lineEdit.text().strip() or 0)
             if num == 1:
                 self.Score1_label.show()
                 self.Score1_lineEdit.show()
